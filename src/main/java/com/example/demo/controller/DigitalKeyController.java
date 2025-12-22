@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/digital-keys")
 @Tag(name = "Digital Keys")
 public class DigitalKeyController {
+    
+DigitalKey key = keyRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Key not found"));
 
     @PostMapping("/generate/{bookingId}")
     public ResponseEntity<?> generateKey(@PathVariable Long bookingId) {
