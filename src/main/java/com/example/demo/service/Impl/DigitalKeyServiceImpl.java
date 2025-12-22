@@ -11,14 +11,13 @@ import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.DigitalKeyRepository;
 import com.example.demo.repository.RoomBookingRepository;
 import com.example.demo.service.DigitalKeyService;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
 @RequiredArgsConstructor
 public class DigitalKeyServiceImpl implements DigitalKeyService {
 
-    @Autowired DigitalKeyRepository keyRepository;
-    @Autowired RoomBookingRepository bookingRepository;
+    private final DigitalKeyRepository keyRepository;
+    private final RoomBookingRepository bookingRepository;
 
     @Override
     public DigitalKey generateKey(Long bookingId) {

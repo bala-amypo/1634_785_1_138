@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Service
 public class GuestServiceImpl implements GuestService {
 
-    @Autowired public GuestRepository repo;
+    private final GuestRepository repo;
 
     public GuestServiceImpl(GuestRepository repo) {
         this.repo = repo;
