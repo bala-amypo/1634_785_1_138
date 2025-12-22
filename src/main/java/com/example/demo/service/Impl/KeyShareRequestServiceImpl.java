@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 
-import com.example.demo.entity.KeyShareRequest;
+import com.example.demo.model.KeyShareRequest;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.KeyShareRequestRepository;
 import com.example.demo.service.KeyShareRequestService;

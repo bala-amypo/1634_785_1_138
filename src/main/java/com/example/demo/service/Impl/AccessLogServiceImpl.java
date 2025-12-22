@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 
-import com.example.demo.entity.AccessLog;
-import com.example.demo.entity.DigitalKey;
+import com.example.demo.model.AccessLog;
+import com.example.demo.model.DigitalKey;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.AccessLogRepository;
 import com.example.demo.repository.DigitalKeyRepository;

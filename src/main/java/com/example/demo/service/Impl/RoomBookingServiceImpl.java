@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 
-import com.example.demo.entity.RoomBooking;
+import com.example.demo.model.RoomBooking;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.RoomBookingRepository;
 import com.example.demo.service.RoomBookingService;
