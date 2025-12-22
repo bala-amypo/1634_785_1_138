@@ -1,3 +1,7 @@
+import java.util.List;
+
+import com.example.demo.entity.AccessLog;
+
 public interface AccessLogService {
 
     AccessLog createLog(AccessLog log);

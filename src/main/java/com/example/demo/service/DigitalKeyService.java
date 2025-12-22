@@ -1,3 +1,7 @@
+import java.util.List;
+
+import com.example.demo.entity.DigitalKey;
+
 public interface DigitalKeyService {
 
     DigitalKey generateKey(Long bookingId);
