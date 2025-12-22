@@ -29,7 +29,7 @@ public class GuestServiceImpl implements GuestService {
     }
 
     public Guest getGuestById(Long id) {
-        return repo.findById(id).orElseThrow();
+        return repo.findById(id).orElseThrow(null);
     }
 
     public List<Guest> getAllGuests() {
