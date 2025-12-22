@@ -1,6 +1,4 @@
-import java.util.List;
-
-import org.springframework.stereotype.Service;
+package com.example.demo.service.impl;
 
 import lombok.RequiredArgsConstructor;
 
@@ -9,7 +7,7 @@ import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.GuestRepository;
 import com.example.demo.service.GuestService;
 
-package com.example.demo.service.impl;
+
 
 import org.springframework.stereotype.Service;
 import com.example.demo.service.GuestService;
