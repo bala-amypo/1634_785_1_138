@@ -25,13 +25,13 @@ public class Guest {
         createdAt = Instant.now();
     }
 
-    // ✅ GETTERS & SETTERS (REQUIRED)
+    
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {   // ✅ FIX
+    public void setId(Long id) {   
         this.id = id;
     }
 
@@ -39,7 +39,7 @@ public class Guest {
         return active;
     }
 
-    public void setActive(Boolean active) {  // ✅ FIX
+    public void setActive(Boolean active) {  
         this.active = active;
     }
 
