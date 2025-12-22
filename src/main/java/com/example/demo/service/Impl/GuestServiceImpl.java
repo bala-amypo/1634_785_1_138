@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class GuestServiceImpl implements GuestService {
 
-    private  GuestRepository repo;
+    public GuestRepository repo;
 
     public GuestServiceImpl(GuestRepository repo) {
         this.repo = repo;

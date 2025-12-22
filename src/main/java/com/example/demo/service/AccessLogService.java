@@ -1,6 +1,6 @@
 import java.util.List;
 
-import com.example.demo.entity.AccessLog;
+import com.example.demo.model.AccessLog;
 
 public interface AccessLogService {
 

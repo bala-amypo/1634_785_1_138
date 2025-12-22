@@ -1,6 +1,6 @@
 import java.util.List;
 
-import com.example.demo.entity.RoomBooking;
+import com.example.demo.model.RoomBooking;
 
 public interface RoomBookingService {
 

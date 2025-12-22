@@ -1,6 +1,6 @@
 import java.util.List;
 
-import com.example.demo.entity.KeyShareRequest;
+import com.example.demo.model.KeyShareRequest;
 public interface KeyShareRequestService {
 
     KeyShareRequest createShareRequest(KeyShareRequest request);

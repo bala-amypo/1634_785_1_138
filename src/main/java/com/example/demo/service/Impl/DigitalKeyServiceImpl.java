@@ -16,8 +16,8 @@ import com.example.demo.service.DigitalKeyService;
 @RequiredArgsConstructor
 public class DigitalKeyServiceImpl implements DigitalKeyService {
 
-    private final DigitalKeyRepository keyRepository;
-    private final RoomBookingRepository bookingRepository;
+    public final DigitalKeyRepository keyRepository;
+    public final RoomBookingRepository bookingRepository;
 
     @Override
     public DigitalKey generateKey(Long bookingId) {
