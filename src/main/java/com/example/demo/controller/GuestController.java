@@ -1,42 +1,38 @@
-package com.example.demo.controller;
+package com.example.api.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.example.demo.model.Guest;
-import com.example.demo.service.GuestService;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/guests")
+@Tag(name = "Guests")
 public class GuestController {
 
-    private final GuestService service;
-
-    public GuestController(GuestService service) {
-        this.service = service;
-    }
-
     @PostMapping
-    public Guest create(@RequestBody Guest guest) {
-        return service.createGuest(guest);
+    public ResponseEntity<?> createGuest(@RequestBody Object request) {
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("/{id}")
-    public Guest update(@PathVariable Long id, @RequestBody Guest guest) {
-        return service.updateGuest(id, guest);
+    public ResponseEntity<?> updateGuest(
+            @PathVariable Long id,
+            @RequestBody Object request) {
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{id}")
-    public Guest get(@PathVariable Long id) {
-        return service.getGuestById(id);
+    public ResponseEntity<?> getGuest(@PathVariable Long id) {
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping
-    public List<Guest> list() {
-        return service.getAllGuests();
+    public ResponseEntity<?> listGuests() {
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("/{id}/deactivate")
-    public void deactivate(@PathVariable Long id) {
-        service.deactivateGuest(id);
+    public ResponseEntity<?> deactivateGuest(@PathVariable Long id) {
+        return ResponseEntity.ok().build();
     }
 }
