@@ -5,3 +5,5 @@ import com.example.demo.model.Guest;
 
  interface GuestRepository extends JpaRepository<Guest, Long> {
 }
+public interface GuestRepository {
+}
