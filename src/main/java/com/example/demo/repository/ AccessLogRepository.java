@@ -2,8 +2,7 @@ package com.example.demo.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.demo.model.AccessLog;
-import org.springframework.data.stereotype.Repository;
-
+import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
