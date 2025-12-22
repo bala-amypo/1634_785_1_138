@@ -1,3 +1,7 @@
+import java.util.List;
+
+import com.example.demo.entity.Guest;
+
 public interface GuestService {
 
     Guest createGuest(Guest guest);
