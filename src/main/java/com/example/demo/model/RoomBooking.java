@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
+@Getter
+@Setter
 public class RoomBooking {
 
     @Id
@@ -22,5 +24,5 @@ public class RoomBooking {
     @ManyToMany
     private Set<Guest> roommates;
 
-    // getters & setters
+    
 }
