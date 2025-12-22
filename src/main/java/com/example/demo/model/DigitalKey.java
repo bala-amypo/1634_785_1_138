@@ -7,7 +7,6 @@ import lombok.Setter;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-@Entity
 @Getter
 @Setter
 @AllArgsConstructor
