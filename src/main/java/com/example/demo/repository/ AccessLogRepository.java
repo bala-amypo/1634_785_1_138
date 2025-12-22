@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-interface AccessLogRepository extends JpaRepository<AccessLog, Long> {
+publinterface AccessLogRepository extends JpaRepository<AccessLog, Long> {
     List<AccessLog> findByGuestId(Long guestId);
     List<AccessLog> findByDigitalKeyId(Long keyId);
 }
