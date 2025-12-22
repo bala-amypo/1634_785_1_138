@@ -8,12 +8,14 @@ import com.example.demo.model.KeyShareRequest;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.KeyShareRequestRepository;
 import com.example.demo.service.KeyShareRequestService;
+import org.springframework.beans.factory.annotation.Autowired;
+
 
 @Service
 @RequiredArgsConstructor
 public class KeyShareRequestServiceImpl implements KeyShareRequestService {
 
-    private final KeyShareRequestRepository requestRepository;
+    @Autowired KeyShareRequestRepository requestRepository;
 
     @Override
     public KeyShareRequest createShareRequest(KeyShareRequest request) {

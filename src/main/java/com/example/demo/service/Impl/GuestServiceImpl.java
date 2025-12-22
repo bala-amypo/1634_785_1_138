@@ -9,11 +9,13 @@ import org.springframework.stereotype.Service;
 import com.example.demo.service.GuestService;
 import com.example.demo.repository.GuestRepository;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+
 
 @Service
 public class GuestServiceImpl implements GuestService {
 
-    public GuestRepository repo;
+    @Autowired public GuestRepository repo;
 
     public GuestServiceImpl(GuestRepository repo) {
         this.repo = repo;

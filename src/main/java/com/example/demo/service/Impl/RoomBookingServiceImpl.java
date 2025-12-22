@@ -8,12 +8,14 @@ import com.example.demo.model.RoomBooking;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.RoomBookingRepository;
 import com.example.demo.service.RoomBookingService;
+import org.springframework.beans.factory.annotation.Autowired;
+
 
 @Service
 @RequiredArgsConstructor
 public class RoomBookingServiceImpl implements RoomBookingService {
 
-    private final RoomBookingRepository bookingRepository;
+    @Autowired RoomBookingRepository bookingRepository;
 
     @Override
     public RoomBooking createBooking(RoomBooking booking) {
