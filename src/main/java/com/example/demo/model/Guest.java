@@ -25,5 +25,65 @@ public class Guest {
         createdAt = Instant.now();
     }
 
-    // getters & setters
+    // ✅ GETTERS & SETTERS (REQUIRED)
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {   // ✅ FIX
+        this.id = id;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {  // ✅ FIX
+        this.active = active;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Boolean getVerified() {
+        return verified;
+    }
+
+    public void setVerified(Boolean verified) {
+        this.verified = verified;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
 }
