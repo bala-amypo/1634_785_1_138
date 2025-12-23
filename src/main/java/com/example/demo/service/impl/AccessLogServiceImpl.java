@@ -22,7 +22,7 @@ public class AccessLogServiceImpl implements AccessLogService {
 
     @Override
     public AccessLog createLog(AccessLog log) {
-        DigitalKey key = keyRepository.findById(log.getKey().getId())
+        DigitalKey key = keyRepository.findById(log.getDigitalKey().getId())
                 .orElseThrow(() -> new ResourceNotFoundException("Key not found"));
 
         log.setTimestamp(LocalDateTime.now());
