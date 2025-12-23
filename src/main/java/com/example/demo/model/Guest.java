@@ -1,14 +1,13 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import java.time.Instant;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Datav;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
