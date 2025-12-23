@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.model.AccessLog;
 
 @Repository
-public interface AccessLogRepository extends JpaRepository<AccessLog, Long> {
+public interface  AccessLogRepository extends JpaRepository<AccessLog, Long> {
 
     List<AccessLog> findByDigitalKeyId(Long keyId);
     List<AccessLog> findByGuestId(Long guestId);
