@@ -1,17 +1,19 @@
 package com.example.demo.service;
-import java.util.List;
 
-import com.example.demo.model.RoomBooking;
+import com.example.demo.model.Booking;
+import com.example.demo.model.Room;
+
+import java.time.LocalDate;
+import java.util.List;
 
 public interface RoomBookingService {
 
-    RoomBooking createBooking(RoomBooking booking);
+    List<Room> getAvailableRooms();
 
-    RoomBooking updateBooking(Long id, RoomBooking booking);
+    Booking bookRoom(Long roomId,
+                     String customerName,
+                     LocalDate checkInDate,
+                     LocalDate checkOutDate);
 
-    RoomBooking getBookingById(Long id);
-
-    List<RoomBooking> getBookingsForGuest(Long guestId);
-
-    void deactivateBooking(Long id);
+    void cancelBooking(Long bookingId);
 }
