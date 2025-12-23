@@ -76,6 +76,9 @@ public class KeyShareRequest {
         return createdAt;
     }
 
+    public void SetId(Long id) {
+        this.id=id;
+    }
     public void setDigitalKey(DigitalKey digitalKey) {
         this.digitalKey = digitalKey;
     }
