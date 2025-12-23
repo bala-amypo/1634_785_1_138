@@ -20,7 +20,7 @@ public class RoomBookingServiceImpl implements RoomBookingService {
 
     @Override
     public RoomBooking createBooking(RoomBooking booking) {
-        if (booking.getCheckOut().isBefore(booking.getCheckIn())) {
+        if (booking.getCheckOutDate().isBefore(booking.getCheckInDate())) {
             throw new IllegalArgumentException("Invalid booking dates");
         }
         booking.setActive(true);
@@ -30,8 +30,8 @@ public class RoomBookingServiceImpl implements RoomBookingService {
     @Override
     public RoomBooking updateBooking(Long id, RoomBooking booking) {
         RoomBooking existing = getBookingById(id);
-        existing.setCheckIn(booking.getCheckIn());
-        existing.setCheckOut(booking.getCheckOut());
+        existing.setCheckInDate(booking.getCheckInDate());
+        existing.setCheckOutDate(booking.getCheckOutDate());
         return bookingRepository.save(existing);
     }
 
