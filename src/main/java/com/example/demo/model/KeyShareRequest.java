@@ -2,13 +2,11 @@ package com.example.demo.model;
 
 import jakarta.persistence.*;
 import java.time.Instant;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -36,6 +34,4 @@ public class KeyShareRequest {
     void onCreate() {
         createdAt = Instant.now();
     }
-
-    // getters & setters
 }

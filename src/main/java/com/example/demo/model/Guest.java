@@ -1,9 +1,10 @@
 package com.example.demo.model;
 
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.persistence.GenerationType;
 import java.time.Instant;
-import lombok.Datav;
+import lombok.Data;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
