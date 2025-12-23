@@ -10,6 +10,6 @@ import com.example.demo.model.AccessLog;
 @Repository
 public interface AccessLogRepository extends JpaRepository<AccessLog, Long> {
 
-    List<AccessLog> findByKeyId(Long keyId);
+    List<AccessLog> findByDigitalKeyId(Long keyId);
     List<AccessLog> findByGuestId(Long guestId);
 }

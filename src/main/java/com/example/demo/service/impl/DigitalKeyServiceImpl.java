@@ -59,6 +59,6 @@ public class DigitalKeyServiceImpl implements DigitalKeyService {
 
     @Override
     public List<DigitalKey> getKeysForGuest(Long guestId) {
-        return keyRepository.findByGuestId(guestId);
+        return keyRepository.findByBookingGuestId(guestId);
     }
 }
