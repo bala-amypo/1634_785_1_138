@@ -1,39 +1,49 @@
 package com.example.demo.service.impl;
-import java.time.LocalDateTime;
-import java.util.List;
-
-import org.springframework.stereotype.Service;
-
-import lombok.RequiredArgsConstructor;
 
 import com.example.demo.model.AccessLog;
 import com.example.demo.model.DigitalKey;
-import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.AccessLogRepository;
 import com.example.demo.repository.DigitalKeyRepository;
 import com.example.demo.service.AccessLogService;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
 @Service
-@RequiredArgsConstructor
 public class AccessLogServiceImpl implements AccessLogService {
 
-    private final AccessLogRepository logRepository;
-    private final DigitalKeyRepository keyRepository;
+    AccessLogRepository logRepository;
+    DigitalKeyRepository keyRepository;
+
+    @Autowired
+    public AccessLogServiceImpl(AccessLogRepository logRepository,
+                                DigitalKeyRepository keyRepository) {
+        this.logRepository = logRepository;
+        this.keyRepository = keyRepository;
+    }
 
     @Override
     public AccessLog createLog(AccessLog log) {
         DigitalKey key = keyRepository.findById(log.getDigitalKey().getId())
-                .orElseThrow(() -> new ResourceNotFoundException("Key not found"));
+                .orElse(null);
 
         log.setAccessTime(LocalDateTime.now());
-        log.setResult(key.isActive() ? "SUCCESS" : "DENIED");
 
+        if (key != null && key.isActive()) {
+            log.setResult("SUCCESS");
+        } else {
+            log.setResult("DENIED");
+            log.setReason("Invalid or inactive key");
+        }
         return logRepository.save(log);
     }
 
     @Override
     public List<AccessLog> getLogsForKey(Long keyId) {
-        return logRepository.findByKeyId(keyId);
+        return logRepository.findByDigitalKeyId(keyId);
     }
 
     @Override
