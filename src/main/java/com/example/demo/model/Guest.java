@@ -71,6 +71,9 @@ public class Guest {
         return createdAt;
     }
 
+     public void SetId(Long id) {
+        this.id=id;
+    }
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
