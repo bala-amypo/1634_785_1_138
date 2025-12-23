@@ -25,7 +25,7 @@ public class AccessLogServiceImpl implements AccessLogService {
         DigitalKey key = keyRepository.findById(log.getDigitalKey().getId())
                 .orElseThrow(() -> new ResourceNotFoundException("Key not found"));
 
-        log.setTimestamp(LocalDateTime.now());
+        log.setAccessTime(LocalDateTime.now());
         log.setResult(key.isActive() ? "SUCCESS" : "DENIED");
 
         return logRepository.save(log);

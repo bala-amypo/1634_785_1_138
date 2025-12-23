@@ -32,7 +32,7 @@ public class DigitalKeyServiceImpl implements DigitalKeyService {
         DigitalKey key = new DigitalKey();
         key.setBooking(booking);
         key.setActive(true);
-        key.setGeneratedAt(LocalDateTime.now());
+        key.setIssuedAt(LocalDateTime.now());
         return keyRepository.save(key);
     }
 
