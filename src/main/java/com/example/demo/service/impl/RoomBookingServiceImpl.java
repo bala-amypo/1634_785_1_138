@@ -1,35 +1,37 @@
 package com.example.demo.service.impl;
-import java.util.List;
 
-import org.springframework.stereotype.Service;
-
-import lombok.RequiredArgsConstructor;
-
-import com.example.demo.model.RoomBooking;
 import com.example.demo.exception.ResourceNotFoundException;
+import com.example.demo.model.RoomBooking;
 import com.example.demo.repository.RoomBookingRepository;
 import com.example.demo.service.RoomBookingService;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class RoomBookingServiceImpl implements RoomBookingService {
 
-    @Autowired RoomBookingRepository bookingRepository;
+    RoomBookingRepository bookingRepository;
+
+    @Autowired
+    public RoomBookingServiceImpl(RoomBookingRepository bookingRepository) {
+        this.bookingRepository = bookingRepository;
+    }
 
     @Override
     public RoomBooking createBooking(RoomBooking booking) {
-        if (booking.getCheckOutDate().isBefore(booking.getCheckInDate())) {
+        if (booking.getCheckInDate().isAfter(booking.getCheckOutDate())) {
             throw new IllegalArgumentException("Invalid booking dates");
         }
-        booking.setActive(true);
         return bookingRepository.save(booking);
     }
 
     @Override
     public RoomBooking updateBooking(Long id, RoomBooking booking) {
         RoomBooking existing = getBookingById(id);
+        existing.setRoomNumber(booking.getRoomNumber());
         existing.setCheckInDate(booking.getCheckInDate());
         existing.setCheckOutDate(booking.getCheckOutDate());
         return bookingRepository.save(existing);
@@ -47,9 +49,4 @@ public class RoomBookingServiceImpl implements RoomBookingService {
     }
 
     @Override
-    public void deactivateBooking(Long id) {
-        RoomBooking booking = getBookingById(id);
-        booking.setActive(false);
-        bookingRepository.save(booking);
-    }
-}
+    public void deacti
