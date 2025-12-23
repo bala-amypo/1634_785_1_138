@@ -1,70 +1,58 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.exception.ResourceNotFoundException;
-import com.example.demo.model.Booking;
-import com.example.demo.model.Room;
-import com.example.demo.repository.BookingRepository;
-import com.example.demo.repository.RoomRepository;
-import com.example.demo.service.RoomBookingService;
+import com.example.demo.model.KeyShareRequest;
+import com.example.demo.repository.KeyShareRequestRepository;
+import com.example.demo.service.KeyShareRequestService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Service
-public class RoomBookingServiceImpl implements RoomBookingService {
+public class KeyShareRequestServiceImpl implements KeyShareRequestService {
 
-    private final RoomRepository roomRepository;
-    private final BookingRepository bookingRepository;
+    KeyShareRequestRepository requestRepository;
 
-    public RoomBookingServiceImpl(RoomRepository roomRepository,
-                                  BookingRepository bookingRepository) {
-        this.roomRepository = roomRepository;
-        this.bookingRepository = bookingRepository;
+    @Autowired
+    public KeyShareRequestServiceImpl(KeyShareRequestRepository requestRepository) {
+        this.requestRepository = requestRepository;
     }
 
     @Override
-    public List<Room> getAvailableRooms() {
-        return roomRepository.findByAvailableTrue();
-    }
-
-    @Override
-    public Booking bookRoom(Long roomId,
-                            String customerName,
-                            LocalDate checkInDate,
-                            LocalDate checkOutDate) {
-
-        Room room = roomRepository.findById(roomId)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException("Room not found with id: " + roomId));
-
-        if (!room.isAvailable()) {
-            throw new RuntimeException("Room is already booked");
+    public KeyShareRequest createShareRequest(KeyShareRequest request) {
+        if (request.getShareStart().isAfter(request.getShareEnd())) {
+            throw new IllegalArgumentException("Invalid share dates");
         }
-
-        room.setAvailable(false);
-        roomRepository.save(room);
-
-        Booking booking = new Booking();
-        booking.setRoom(room);
-        booking.setCustomerName(customerName);
-        booking.setCheckInDate(checkInDate);
-        booking.setCheckOutDate(checkOutDate);
-
-        return bookingRepository.save(booking);
+        if (request.getSharedBy().getId()
+                .equals(request.getSharedWith().getId())) {
+            throw new IllegalArgumentException("Cannot share with same user");
+        }
+        request.setStatus("PENDING");
+        return requestRepository.save(request);
     }
 
     @Override
-    public void cancelBooking(Long bookingId) {
+    public KeyShareRequest updateStatus(Long requestId, String status) {
+        KeyShareRequest request = getShareRequestById(requestId);
+        request.setStatus(status);
+        return requestRepository.save(request);
+    }
 
-        Booking booking = bookingRepository.findById(bookingId)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException("Booking not found with id: " + bookingId));
+    @Override
+    public KeyShareRequest getShareRequestById(Long id) {
+        return requestRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Request not found"));
+    }
 
-        Room room = booking.getRoom();
-        room.setAvailable(true);
-        roomRepository.save(room);
+    @Override
+    public List<KeyShareRequest> getRequestsSharedBy(Long guestId) {
+        return requestRepository.findBySharedById(guestId);
+    }
 
-        bookingRepository.delete(booking);
+    @Override
+    public List<KeyShareRequest> getRequestsSharedWith(Long guestId) {
+        return requestRepository.findBySharedWithId(guestId);
     }
 }

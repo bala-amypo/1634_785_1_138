@@ -44,3 +44,14 @@ public class GuestServiceImpl implements GuestService {
         repo.save(g);
     }
 }
+@Override
+public Guest updateGuest(Long id, Guest guest) {
+    Guest existingGuest = repo.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Guest not found with id " + id));
+
+    existingGuest.setName(guest.getName());
+    existingGuest.setEmail(guest.getEmail());
+    existingGuest.setActive(guest.isActive());
+
+    return repo.save(existingGuest);
+}
