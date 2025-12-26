@@ -23,7 +23,6 @@ public class KeyShareRequest {
 
     private Instant shareEnd;
 
-    /* ========= getters & setters ========= */
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }

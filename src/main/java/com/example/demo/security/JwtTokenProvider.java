@@ -20,9 +20,6 @@ public class JwtTokenProvider {
         return Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
     }
 
-    /* ======================================================
-       REQUIRED BY TESTS
-       ====================================================== */
     public String generateToken(Authentication authentication) {
 
         Object principal = authentication.getPrincipal();

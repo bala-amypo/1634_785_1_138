@@ -31,7 +31,6 @@ public class RoomBooking {
     )
     private Set<Guest> roommates = new HashSet<>();
 
-    /* ========= getters & setters ========= */
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
