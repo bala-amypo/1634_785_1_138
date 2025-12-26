@@ -1,21 +1,54 @@
-package com.example.api.controller;
+package com.example.demo.controller;
 
+import com.example.demo.model.Guest;
+import com.example.demo.security.JwtTokenProvider;
+import com.example.demo.service.GuestService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/auth")
-@Tag(name = "Authentication")
+@Tag(name = "Authentication", description = "Endpoints for user registration and login")
 public class AuthController {
 
+    @Autowired
+    private GuestService guestService;
+
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;   // ✅ ADD THIS
+
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody Object request) {
-        return ResponseEntity.ok().build();
+    public ResponseEntity<Guest> register(@RequestBody Guest guest) {
+        return ResponseEntity.ok(guestService.createGuest(guest));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Object request) {
-        return ResponseEntity.ok().build();
+    public ResponseEntity<Map<String, Object>> login(
+            @RequestBody Map<String, String> loginRequest) {
+
+        Guest guest = guestService.loginGuest(
+                loginRequest.get("email"),
+                loginRequest.get("password")
+        );
+
+        // ✅ REAL JWT TOKEN
+        String token = jwtTokenProvider.generateToken(
+                guest.getId(),
+                guest.getEmail(),
+                guest.getRole()
+        );
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Login successful");
+        response.put("guestId", guest.getId());
+        response.put("email", guest.getEmail());
+        response.put("token", token);   // ✅ FIXED
+
+        return ResponseEntity.ok(response);
     }
 }
