@@ -15,7 +15,6 @@ public class GuestServiceImpl implements GuestService {
     private final GuestRepository guestRepository;
     private final PasswordEncoder passwordEncoder;
 
-    // ✅ REQUIRED BY TESTS
     public GuestServiceImpl(GuestRepository guestRepository,
                             PasswordEncoder passwordEncoder) {
         this.guestRepository = guestRepository;
@@ -61,14 +60,12 @@ public class GuestServiceImpl implements GuestService {
         guestRepository.save(guest);
     }
 
-    // ✅ REQUIRED BY INTERFACE
     @Override
     public void deleteGuest(Long id) {
         Guest guest = getGuestById(id);
         guestRepository.delete(guest);
     }
 
-    // ✅ REQUIRED BY INTERFACE (LAST MISSING METHOD)
     @Override
     public Guest loginGuest(String email, String password) {
 

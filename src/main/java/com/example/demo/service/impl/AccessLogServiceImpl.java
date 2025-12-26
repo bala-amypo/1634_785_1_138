@@ -66,7 +66,7 @@ public class AccessLogServiceImpl implements AccessLogService {
         return accessLogRepository.findByDigitalKeyId(keyId);
     }
 
-    // ✅ REQUIRED BY INTERFACE
+    
     @Override
     public List<AccessLog> getAllLogs() {
         return accessLogRepository.findAll();

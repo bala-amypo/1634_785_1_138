@@ -20,7 +20,7 @@ public class AuthController {
     private GuestService guestService;
 
     @Autowired
-    private JwtTokenProvider jwtTokenProvider;   // ✅ ADD THIS
+    private JwtTokenProvider jwtTokenProvider; 
 
     @PostMapping("/register")
     public ResponseEntity<Guest> register(@RequestBody Guest guest) {
@@ -36,7 +36,6 @@ public class AuthController {
                 loginRequest.get("password")
         );
 
-        // ✅ REAL JWT TOKEN
         String token = jwtTokenProvider.generateToken(
                 guest.getId(),
                 guest.getEmail(),
@@ -47,7 +46,7 @@ public class AuthController {
         response.put("message", "Login successful");
         response.put("guestId", guest.getId());
         response.put("email", guest.getEmail());
-        response.put("token", token);   // ✅ FIXED
+        response.put("token", token); 
 
         return ResponseEntity.ok(response);
     }

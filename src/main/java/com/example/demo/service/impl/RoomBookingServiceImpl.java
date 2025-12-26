@@ -13,7 +13,6 @@ public class RoomBookingServiceImpl implements RoomBookingService {
 
     private final RoomBookingRepository roomBookingRepository;
 
-    // ✅ REQUIRED BY TESTS
     public RoomBookingServiceImpl(RoomBookingRepository roomBookingRepository) {
         this.roomBookingRepository = roomBookingRepository;
     }
@@ -51,7 +50,6 @@ public class RoomBookingServiceImpl implements RoomBookingService {
         roomBookingRepository.save(booking);
     }
 
-    // ✅ REQUIRED BY INTERFACE (LAST MISSING METHOD)
     @Override
     public RoomBooking getBookingById(Long id) {
         return roomBookingRepository.findById(id)

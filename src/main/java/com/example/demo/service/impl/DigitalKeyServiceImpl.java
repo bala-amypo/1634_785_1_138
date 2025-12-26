@@ -49,7 +49,6 @@ public class DigitalKeyServiceImpl implements DigitalKeyService {
         return keyRepository.save(key);
     }
 
-    // ✅ REQUIRED BY INTERFACE
     @Override
     public DigitalKey getKeyById(Long id) {
         return keyRepository.findById(id)

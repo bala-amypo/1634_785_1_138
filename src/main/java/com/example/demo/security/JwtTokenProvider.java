@@ -28,7 +28,7 @@ public class JwtTokenProvider {
         Object principal = authentication.getPrincipal();
 
         String email;
-        String role = "ROLE_ADMIN"; // ✅ EXPECTED
+        String role = "ROLE_ADMIN"; 
         Long userId = 1L;
 
         if (principal instanceof UserDetails userDetails) {
