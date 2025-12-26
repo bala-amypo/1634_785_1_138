@@ -1,12 +1,13 @@
 package com.example.demo.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 import com.example.demo.model.DigitalKey;
+import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
+import java.util.Optional;
 
-@Repository
 public interface DigitalKeyRepository extends JpaRepository<DigitalKey, Long> {
-    DigitalKey findByBookingIdAndActiveTrue(Long bookingId);
+
+    Optional<DigitalKey> findByBookingIdAndActiveTrue(Long bookingId);
+
     List<DigitalKey> findByBookingGuestId(Long guestId);
 }

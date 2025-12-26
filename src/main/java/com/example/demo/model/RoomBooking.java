@@ -1,29 +1,16 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-
+import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "room_bookings")
 public class RoomBooking {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "guest_id")
-    private Guest guest;
 
     private String roomNumber;
 
@@ -33,63 +20,37 @@ public class RoomBooking {
 
     private Boolean active = true;
 
+    @ManyToOne
+    private Guest guest;
+
     @ManyToMany
     @JoinTable(
         name = "booking_roommates",
         joinColumns = @JoinColumn(name = "booking_id"),
         inverseJoinColumns = @JoinColumn(name = "guest_id")
     )
-    private Set<Guest> roommates;
+    private Set<Guest> roommates = new HashSet<>();
 
-    public Long getId() {
-        return id;
-    }
+    /* ========= getters & setters ========= */
 
-    public Guest getGuest() {
-        return guest;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public String getRoomNumber() {
-        return roomNumber;
-    }
+    public String getRoomNumber() { return roomNumber; }
+    public void setRoomNumber(String roomNumber) { this.roomNumber = roomNumber; }
 
-    public LocalDate getCheckInDate() {
-        return checkInDate;
-    }
+    public LocalDate getCheckInDate() { return checkInDate; }
+    public void setCheckInDate(LocalDate checkInDate) { this.checkInDate = checkInDate; }
 
-    public LocalDate getCheckOutDate() {
-        return checkOutDate;
-    }
+    public LocalDate getCheckOutDate() { return checkOutDate; }
+    public void setCheckOutDate(LocalDate checkOutDate) { this.checkOutDate = checkOutDate; }
 
-    public Boolean getActive() {
-        return active;
-    }
+    public Boolean getActive() { return active; }
+    public void setActive(Boolean active) { this.active = active; }
 
-    public Set<Guest> getRoommates() {
-        return roommates;
-    }
+    public Guest getGuest() { return guest; }
+    public void setGuest(Guest guest) { this.guest = guest; }
 
-    public void setGuest(Guest guest) {
-        this.guest = guest;
-    }
-
-    public void setRoomNumber(String roomNumber) {
-        this.roomNumber = roomNumber;
-    }
-
-    public void setCheckInDate(LocalDate checkInDate) {
-        this.checkInDate = checkInDate;
-    }
-
-    public void setCheckOutDate(LocalDate checkOutDate) {
-        this.checkOutDate = checkOutDate;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-
-    public void setRoommates(Set<Guest> roommates) {
-        this.roommates = roommates;
-    }
+    public Set<Guest> getRoommates() { return roommates; }
+    public void setRoommates(Set<Guest> roommates) { this.roommates = roommates; }
 }

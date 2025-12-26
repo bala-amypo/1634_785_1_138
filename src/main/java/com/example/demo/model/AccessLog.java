@@ -1,78 +1,44 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-
-import java.time.LocalDateTime;
+import jakarta.persistence.*;
+import java.time.Instant;
 
 @Entity
-@Table(name = "access_logs")
 public class AccessLog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "digital_key_id")
+    @ManyToOne
     private DigitalKey digitalKey;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "guest_id")
+    @ManyToOne
     private Guest guest;
 
-    private LocalDateTime accessTime;
+    private Instant accessTime;
 
     private String result;
 
     private String reason;
 
-    public Long getId() {
-        return id;
-    }
+    /* ========= getters & setters ========= */
 
-    public DigitalKey getDigitalKey() {
-        return digitalKey;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public Guest getGuest() {
-        return guest;
-    }
+    public DigitalKey getDigitalKey() { return digitalKey; }
+    public void setDigitalKey(DigitalKey digitalKey) { this.digitalKey = digitalKey; }
 
-    public LocalDateTime getAccessTime() {
-        return accessTime;
-    }
+    public Guest getGuest() { return guest; }
+    public void setGuest(Guest guest) { this.guest = guest; }
 
-    public String getResult() {
-        return result;
-    }
+    public Instant getAccessTime() { return accessTime; }
+    public void setAccessTime(Instant accessTime) { this.accessTime = accessTime; }
 
-    public String getReason() {
-        return reason;
-    }
+    public String getResult() { return result; }
+    public void setResult(String result) { this.result = result; }
 
-    public void setDigitalKey(DigitalKey digitalKey) {
-        this.digitalKey = digitalKey;
-    }
-
-    public void setGuest(Guest guest) {
-        this.guest = guest;
-    }
-
-    public void setAccessTime(LocalDateTime accessTime) {
-        this.accessTime = accessTime;
-    }
-
-    public void setResult(String result) {
-        this.result = result;
-    }
-
-    public void setReason(String reason) {
-        this.reason = reason;
-    }
+    public String getReason() { return reason; }
+    public void setReason(String reason) { this.reason = reason; }
 }

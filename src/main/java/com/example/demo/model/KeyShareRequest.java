@@ -1,105 +1,45 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.Table;
-
-import java.time.LocalDateTime;
+import jakarta.persistence.*;
+import java.time.Instant;
 
 @Entity
-@Table(name = "key_share_requests")
 public class KeyShareRequest {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "digital_key_id")
+    @ManyToOne
     private DigitalKey digitalKey;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "shared_by")
+    @ManyToOne
     private Guest sharedBy;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "shared_with")
+    @ManyToOne
     private Guest sharedWith;
 
-    private LocalDateTime shareStart;
+    private Instant shareStart;
 
-    private LocalDateTime shareEnd;
+    private Instant shareEnd;
 
-    private String status;
+    /* ========= getters & setters ========= */
 
-    private LocalDateTime createdAt;
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
-    }
+    public DigitalKey getDigitalKey() { return digitalKey; }
+    public void setDigitalKey(DigitalKey digitalKey) { this.digitalKey = digitalKey; }
 
-    public Long getId() {
-        return id;
-    }
+    public Guest getSharedBy() { return sharedBy; }
+    public void setSharedBy(Guest sharedBy) { this.sharedBy = sharedBy; }
 
-    public DigitalKey getDigitalKey() {
-        return digitalKey;
-    }
+    public Guest getSharedWith() { return sharedWith; }
+    public void setSharedWith(Guest sharedWith) { this.sharedWith = sharedWith; }
 
-    public Guest getSharedBy() {
-        return sharedBy;
-    }
+    public Instant getShareStart() { return shareStart; }
+    public void setShareStart(Instant shareStart) { this.shareStart = shareStart; }
 
-    public Guest getSharedWith() {
-        return sharedWith;
-    }
-
-    public LocalDateTime getShareStart() {
-        return shareStart;
-    }
-
-    public LocalDateTime getShareEnd() {
-        return shareEnd;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void SetId(Long id) {
-        this.id=id;
-    }
-    public void setDigitalKey(DigitalKey digitalKey) {
-        this.digitalKey = digitalKey;
-    }
-
-    public void setSharedBy(Guest sharedBy) {
-        this.sharedBy = sharedBy;
-    }
-
-    public void setSharedWith(Guest sharedWith) {
-        this.sharedWith = sharedWith;
-    }
-
-    public void setShareStart(LocalDateTime shareStart) {
-        this.shareStart = shareStart;
-    }
-
-    public void setShareEnd(LocalDateTime shareEnd) {
-        this.shareEnd = shareEnd;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
+    public Instant getShareEnd() { return shareEnd; }
+    public void setShareEnd(Instant shareEnd) { this.shareEnd = shareEnd; }
 }

@@ -1,15 +1,12 @@
 package com.example.demo.repository;
 
+import com.example.demo.model.AccessLog;
+import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+public interface AccessLogRepository extends JpaRepository<AccessLog, Long> {
 
-import com.example.demo.model.AccessLog;
-
-@Repository
-public interface  AccessLogRepository extends JpaRepository<AccessLog, Long> {
-
-    List<AccessLog> findByDigitalKeyId(Long keyId);
     List<AccessLog> findByGuestId(Long guestId);
+
+    List<AccessLog> findByDigitalKeyId(Long digitalKeyId);
 }
