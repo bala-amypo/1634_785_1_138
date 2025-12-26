@@ -1,57 +1,85 @@
 package com.example.demo.service.impl;
 
-import lombok.RequiredArgsConstructor;
-
-import com.example.demo.model.Guest;
 import com.example.demo.exception.ResourceNotFoundException;
-
-import org.springframework.stereotype.Service;
-import com.example.demo.service.GuestService;
+import com.example.demo.model.Guest;
 import com.example.demo.repository.GuestRepository;
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.demo.service.GuestService;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
 
 @Service
 public class GuestServiceImpl implements GuestService {
 
-    private final GuestRepository repo;
+    private final GuestRepository guestRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public GuestServiceImpl(GuestRepository repo) {
-        this.repo = repo;
+    // ✅ REQUIRED BY TESTS
+    public GuestServiceImpl(GuestRepository guestRepository,
+                            PasswordEncoder passwordEncoder) {
+        this.guestRepository = guestRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
+    @Override
     public Guest createGuest(Guest guest) {
-        return repo.save(guest);
+        if (guestRepository.existsByEmail(guest.getEmail())) {
+            throw new IllegalArgumentException("Email already exists");
+        }
+        guest.setPassword(passwordEncoder.encode(guest.getPassword()));
+        return guestRepository.save(guest);
     }
 
-    public Guest updateGuest(Long id, Guest guest) {
-        guest.setId(id);
-        return repo.save(guest);
-    }
-
+    @Override
     public Guest getGuestById(Long id) {
-        return repo.findById(id).orElseThrow(null);
+        return guestRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Guest not found: " + id));
     }
 
+    @Override
     public List<Guest> getAllGuests() {
-        return repo.findAll();
+        return guestRepository.findAll();
     }
 
+    @Override
+    public Guest updateGuest(Long id, Guest updated) {
+        Guest existing = getGuestById(id);
+        existing.setFullName(updated.getFullName());
+        existing.setPhoneNumber(updated.getPhoneNumber());
+        existing.setVerified(updated.getVerified());
+        existing.setActive(updated.getActive());
+        existing.setRole(updated.getRole());
+        return guestRepository.save(existing);
+    }
+
+    @Override
     public void deactivateGuest(Long id) {
-        Guest g = getGuestById(id);
-        g.setActive(false);
-        repo.save(g);
+        Guest guest = getGuestById(id);
+        guest.setActive(false);
+        guestRepository.save(guest);
     }
-}
-@Override
-public Guest updateGuest(Long id, Guest guest) {
-    Guest existingGuest = repo.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Guest not found with id " + id));
 
-    existingGuest.setName(guest.getName());
-    existingGuest.setEmail(guest.getEmail());
-    existingGuest.setActive(guest.isActive());
+    // ✅ REQUIRED BY INTERFACE
+    @Override
+    public void deleteGuest(Long id) {
+        Guest guest = getGuestById(id);
+        guestRepository.delete(guest);
+    }
 
-    return repo.save(existingGuest);
+    // ✅ REQUIRED BY INTERFACE (LAST MISSING METHOD)
+    @Override
+    public Guest loginGuest(String email, String password) {
+
+        Guest guest = guestRepository.findByEmail(email)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Guest not found: " + email));
+
+        if (!passwordEncoder.matches(password, guest.getPassword())) {
+            throw new IllegalArgumentException("Invalid credentials");
+        }
+
+        return guest;
+    }
 }
